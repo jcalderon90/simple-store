@@ -1,6 +1,5 @@
 
 
-import { Eye } from 'lucide-react';
 import { useState } from 'react';
 import ProductModal from './ProductModal';
 import { useCart } from '../context/CartContext';
@@ -18,7 +17,7 @@ export default function ProductCard({ product }) {
                     className="absolute top-2 right-2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition z-10 cursor-pointer"
                     title="Ver detalles"
                 >
-                    <Eye size={16} className="text-gray-600" />
+                    <span className="text-gray-600 text-sm">👁️</span>
                 </button>
 
                 <img
