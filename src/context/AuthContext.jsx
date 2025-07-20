@@ -1,6 +1,6 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
-import { loginRequest } from "../api/auth.js";
+import { loginRequest } from "../services/api.js";
 import { useNavigate } from "react-router-dom";
 
 
@@ -37,12 +37,16 @@ export const AuthProvider = ({ children }) => {
         try {
 
             const res = await loginRequest(user);
-            console.log(res.data);
+            console.log('Login response:', res);
 
-            localStorage.setItem('token', res.data.token);
-
-            setUser(res.data.user);
-            setIsAuth(true);
+            // Fake store API returns { token: "..." }
+            if (res && res.token) {
+                localStorage.setItem('token', res.token);
+                setUser({ username: user.username });
+                setIsAuth(true);
+            } else {
+                setErrors(['Respuesta de login inválida']);
+            }
 
         }
         catch (error) {

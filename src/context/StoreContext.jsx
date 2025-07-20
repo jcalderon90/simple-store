@@ -1,6 +1,6 @@
 
 import { createContext, useContext, useState } from "react";
-import { getProductsRequest } from "../api/products";
+import { getProducts as getProductsAPI } from "../services/api";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const StoreContext = createContext();
@@ -26,9 +26,9 @@ export const StoreProvider = ({ children }) => {
         try {
             setLoading(true);
             setError(null);
-            const response = await getProductsRequest();
+            const products = await getProductsAPI();
 
-            return response.data;
+            return products;
         }
         catch (error) {
             console.error('Error fetching products:', error);
